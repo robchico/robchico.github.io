@@ -596,7 +596,7 @@
             </div>
             <!-- sidebar-wrapper  -->
             <div class="page-content">
-                <div class="container-fluid">
+                <div class="container-fluid" id="inicio">
                     <a name="fp"></a>
                     <div class="display-4">Estudios Realizados</div>
                     <hr>
@@ -842,9 +842,42 @@
         <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
         <script>
-            $(document).ready(function () {
-                 $(".page-wrapper").removeClass("toggled");
-            });
+				var cont=0;
+				if (document.body){
+					var ancho = (document.body.clientWidth);
+					var alto = (document.body.clientHeight);
+				}else{
+					var ancho = (window.innerWidth);
+					var alto = (window.innerHeight);
+				}
+				
+				if(ancho<=500){
+					$(".page-wrapper").removeClass("toggled");
+					$("#inicio").prepend("<p id='miNombre' class='h4'>Bienvenidos al<strong> CV</strong> online de <strong>Roberto Chico</strong></p>");
+					
+				}else{
+					//$("#miNombre").hide();
+				}
+				
+				$(window).on('resize', function(){
+					var win = $(this); //this = window
+					
+					if (win.width() <= 700) {
+						$(".page-wrapper").removeClass("toggled");
+						if(cont ===0){
+							$("#inicio").prepend("<p id='miNombre' class='h4'>Bienvenidos al<strong> CV</strong> online de <strong>Roberto Chico</strong></p>");
+							++cont;
+						}
+						
+					}else{
+						$(".page-wrapper").addClass("toggled");
+						$("#miNombre").hide();
+						cont=0;
+					}
+				});
+
+                 
+            
             $(".sidebar-dropdown > a").click(function () {
                 $(".sidebar-submenu").slideUp(200);
                 if (
